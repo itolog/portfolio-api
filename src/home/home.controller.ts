@@ -2,15 +2,16 @@ import { Controller, Get, Post, Body } from '@nestjs/common';
 
 import { HomeService } from './home.service';
 import { Descs } from './schemas/description.schema';
+import { UserDto } from './dto/user.dto';
 
 @Controller('home')
 export class HomeController {
   constructor(private homeService: HomeService) {}
 
   @Get()
-  async desctription(): Promise<Descs[] | ResError[]> {
+  async getUserInfo(): Promise<Descs[] | ResError[]> {
     try {
-      return await this.homeService.getDescriptions();
+      return await this.homeService.getUserInfo();
     } catch (e) {
       return [
         {
@@ -22,11 +23,11 @@ export class HomeController {
   }
 
   @Post()
-  async updateDesctription(
-    @Body() desc: { descriptions: string },
+  async updateUserInfo(
+    @Body() desc:UserDto,
   ): Promise<Descs[] | ResError[]> {
     try {
-      return await this.homeService.updateDescriptions(desc.descriptions);
+      return await this.homeService.updateUserInfo(desc);
     } catch (e) {
       return [
         {

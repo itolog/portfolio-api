@@ -3,12 +3,13 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Descs } from './schemas/description.schema';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class HomeService {
   constructor(@InjectModel(Descs.name) private descModel: Model<Descs>) {}
 
-  async getDescriptions(): Promise<any> {
+  async getUserInfo(): Promise<any> {
     try {
       const description = await this.descModel.find().exec();
       return description;
@@ -17,9 +18,9 @@ export class HomeService {
     }
   }
 
-  async updateDescriptions(description: string): Promise<any> {
+  async updateUserInfo(description: UserDto): Promise<any> {
     try {
-      return await this.descModel.updateOne({}, { description }).exec();
+      return await this.descModel.updateOne({},  description ).exec();
     } catch (e) {
       throw new Error(e);
     }

@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class Descs extends Document {
   @Prop()
+  title: string;
+
+  @Prop()
   description: string;
 }
 

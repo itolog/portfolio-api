@@ -18,14 +18,16 @@ export class MailService {
   `;
 
     try {
-      const mail = await this.mailerService.sendMail({
+       await this.mailerService.sendMail({
         to: process.env.EMAIL_USER,
         from: data.from,
         subject: 'Mail from Portfolio ✔',
         text: data.text,
         html: output,
       });
-      return mail;
+      return {
+        status: 'OK'
+      };
     } catch (e) {
       throw new Error(e);
     }
