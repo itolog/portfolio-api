@@ -1,5 +1,5 @@
 export class MaillDto {
-  readonly from: string;
-  readonly text: string;
+  readonly email: string;
+  readonly message: string;
   readonly name: string;
 }
